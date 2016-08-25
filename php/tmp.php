@@ -1,1 +1,0 @@
-<?php $config = array( 'composer' => 'undefined', 'php' => 'php', 'autoload' => array('D:\mywamp\bin\atom\autoload.php',), 'classmap' => array('vendor/composer/autoload_classmap.php','autoload/ezp_kernel.php',) );
