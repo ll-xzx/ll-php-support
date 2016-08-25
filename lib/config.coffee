@@ -60,9 +60,9 @@ module.exports =
         testResult = exec.spawnSync(@config.php, ["-v"])
 
         errorTitle = 'll-php-support - Incorrect setup!'
-        errorMessage = 'Either PHP or Composer is not correctly set up and as a result PHP autocompletion will not work. ' +
-          'Please visit the settings screen to correct this error. If you are not specifying an absolute path for PHP or ' +
-          'Composer, make sure they are in your PATH.
+        errorMessage = 'Either PHP is not correctly set up and as a result PHP autocompletion will not work. ' +
+          'Please visit the settings screen to correct this error. If you are not specifying an absolute path for PHP ' +
+          ', make sure they are in your PATH.
           Feel free to look package\'s README for configuration examples'
 
         if testResult.status = null or testResult.status != 0
@@ -71,10 +71,10 @@ module.exports =
 
         # # Test Composer.
         # testResult = exec.spawnSync(@config.php, [@config.composer, "--version"])
-        # 
+        #
         # if testResult.status = null or testResult.status != 0
         #     testResult = exec.spawnSync(@config.composer, ["--version"])
-        # 
+        #
         #     # Try executing Composer directly.
         #     if testResult.status = null or testResult.status != 0
         #         atom.notifications.addError(errorTitle, {'detail': errorMessage})
