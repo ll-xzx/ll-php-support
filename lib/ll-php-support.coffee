@@ -44,33 +44,27 @@ module.exports = LlPhpSupport =
 
 
     activate: (state) ->
-        console.log 'activate'
-
         config.testConfig()
         config.init()
         @autocompletionManager = new AutocompletionManager()
         @autocompletionManager.init()
+        
         @tooltipManager = new TooltipManager()
         @tooltipManager.init()
-        console.log 's'
         return
 
     deactivate: ->
-
+        @tooltipManager.deactivate()
+        @autocompletionManager.deactivate()
 
     toggle: ->
-        console.log 'LlPhpSupport was toggled!'
 
     convert: ->
-        console.log 'LlPhpSupport convert'
 
     getProvider: ->
-        console.log 'LlPhpSupport getProvider'
-        console.log @autocompletionManager.getProviders()
         return @autocompletionManager.getProviders()
 
     provideAutocompleteTools: ->
-        console.log 'LlPhpSupport provideAutocompleteTools'
         @services =
             proxy: proxy
             parser: parser

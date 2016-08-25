@@ -69,7 +69,6 @@ module.exports =
      * @return string
     ###
     getFullClassName: (editor, className = null, noCurrent = false) ->
-        console.log 'php-file-parser.coffee getFullClassName'
         if className == null
             className = ''
 
@@ -159,7 +158,6 @@ module.exports =
      *                     rows. This could be zero if a use statement was already present.
     ###
     addUseClass: (editor, className, allowAdditionalNewlines) ->
-        console.log 'xx addUseClass'
         if className.split('\\').length == 1 or className.indexOf('\\') == 0
             return null
 
@@ -391,7 +389,10 @@ module.exports =
         while line > 0
             lineText = editor.lineTextForBufferRow(line)
             return unless lineText
-
+            
+            #modify by liule1 for \t 
+            position.column -= (lineText.match /^\t*/)[0].length * 3;
+            
             if line != position.row
                 i = (lineText.length - 1)
 
@@ -399,6 +400,7 @@ module.exports =
                 i = position.column - 1
 
             while i >= 0
+                a = lineText[i]
                 if lineText[i] == '('
                     ++parenthesesOpened
 
@@ -661,7 +663,6 @@ module.exports =
      * @param {Object}     calledClass    Information about the called class (optional).
     ###
     getMemberContext: (editor, term, bufferPosition, calledClass) ->
-        console.log 'php-file-parser.coffee getMemberContext'
         if not calledClass
             calledClass = @getCalledClass(editor, term, bufferPosition)
 

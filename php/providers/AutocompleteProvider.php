@@ -82,11 +82,10 @@ class AutocompleteProvider extends Tools implements ProviderInterface
                     }
                 }
             }
-        }
-        
-        if ($relevantClass === null) {
+        } else {
             $relevantClass = ucfirst($name);
         }
+        
 
         // Minor optimization to avoid fetching the same data twice.
         return ($relevantClass === $class) ? $data : $this->getClassMetadata($relevantClass);

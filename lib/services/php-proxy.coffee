@@ -42,7 +42,6 @@ module.exports =
                         if noparser
                             args = command
                         
-                        console.log args.join(' ')
                         stdout = exec.spawnSync(config.config.php, args, options).output[1].toString('ascii')
 
                         delete @currentProcesses[processKey]
@@ -73,7 +72,6 @@ module.exports =
                     if noparser
                         args = command
 
-                    console.log args.join(' ')
                     @currentProcesses[processKey] = exec.exec(config.config.php + " " + args.join(" "), options, (error, stdout, stderr) =>
                         delete @currentProcesses[processKey]
 

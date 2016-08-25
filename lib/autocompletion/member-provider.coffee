@@ -16,7 +16,6 @@ class MemberProvider extends AbstractProvider
      * @return array
     ###
     fetchSuggestions: ({editor, bufferPosition, scopeDescriptor, prefix}) ->
-        console.log 'fetchSuggestions'
         # Autocompletion for class members, i.e. after a ::, ->, ...
         @regex = /(?:(?:[a-zA-Z0-9_]*)\s*(?:\(.*\))?\s*(?:->|::)\s*)+([a-zA-Z0-9_]*)/g
 
@@ -75,7 +74,6 @@ class MemberProvider extends AbstractProvider
      * @return array
     ###
     findSuggestionsForPrefix: (editor, className, prefix, filterCallback, insertParameterList = true) ->
-        console.log 'findSuggestionsForPrefix'
         methods = proxy.methods(className, editor)
 
         if not methods?.names

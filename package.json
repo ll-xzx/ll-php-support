@@ -4,9 +4,6 @@
   "version": "0.0.1",
   "description": "A short description of your package",
   "keywords": [],
-  "activationCommands": {
-    "atom-workspace": "ll-php-support:toggle"
-  },
   "repository": "https://github.com/ll-xzx/ll-php-support.git",
   "license": "MIT",
   "engines": {

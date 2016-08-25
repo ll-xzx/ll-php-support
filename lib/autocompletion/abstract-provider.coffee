@@ -71,7 +71,6 @@ class AbstractProvider
      * @return string The signature
     ###
     getFunctionSignature: (word, element) ->
-        console.log 'getFunctionSignature'
         snippet = @getFunctionSnippet(word, element)
 
         # Just strip out the placeholders.

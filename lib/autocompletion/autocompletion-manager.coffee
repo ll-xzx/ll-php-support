@@ -13,10 +13,10 @@ class AutocompletionManager
      * Initializes the autocompletion providers.
     ###
     init: () ->
-        # @providers.push new ConstantProvider()
-        # @providers.push new VariableProvider()
-        # @providers.push new FunctionProvider()
-        # @providers.push new ClassProvider()
+        @providers.push new ConstantProvider()
+        @providers.push new VariableProvider()
+        @providers.push new FunctionProvider()
+        @providers.push new ClassProvider()
         @providers.push new MemberProvider()
         for provider in @providers
             provider.init(@)
