@@ -15,9 +15,9 @@ class AutocompletionManager
     init: () ->
         @providers.push new ConstantProvider()
         @providers.push new VariableProvider()
+        @providers.push new MemberProvider()
         @providers.push new FunctionProvider()
         @providers.push new ClassProvider()
-        @providers.push new MemberProvider()
         for provider in @providers
             provider.init(@)
 

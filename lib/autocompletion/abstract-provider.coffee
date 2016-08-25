@@ -27,6 +27,7 @@ class AbstractProvider
      * @return array Suggestions
     ###
     getSuggestions: ({editor, bufferPosition, scopeDescriptor, prefix}) ->
+        # console.log 'getSuggestions'
         return @fetchSuggestions({editor, bufferPosition, scopeDescriptor, prefix})
 
     ###*

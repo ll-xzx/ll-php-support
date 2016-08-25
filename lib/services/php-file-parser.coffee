@@ -389,10 +389,10 @@ module.exports =
         while line > 0
             lineText = editor.lineTextForBufferRow(line)
             return unless lineText
-            
-            #modify by liule1 for \t 
+
+            #modify by liule1 for \t
             position.column -= (lineText.match /^\t*/)[0].length * 3;
-            
+
             if line != position.row
                 i = (lineText.length - 1)
 
@@ -400,7 +400,6 @@ module.exports =
                 i = position.column - 1
 
             while i >= 0
-                a = lineText[i]
                 if lineText[i] == '('
                     ++parenthesesOpened
 
@@ -684,7 +683,7 @@ module.exports =
                 console.log 'Failed to get methods for ' + calledClass + ' : ' + methods.error.message
 
             return
-        if methods.values?.hasOwnProperty(term) == false 
+        if methods.values?.hasOwnProperty(term) == false
             return
 
         value = methods.values[term]

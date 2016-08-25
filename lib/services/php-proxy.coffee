@@ -23,8 +23,8 @@ module.exports =
     execute: (command, async, options, noparser, editor) ->
         if !editor
             console.log 'empty'
-        
-        
+
+
         options = {} if not options
         processKey = command.join("_")
 
@@ -41,7 +41,8 @@ module.exports =
                         args =  [__dirname + "/../../php/parser.php",  directory.path].concat(command).concat([editor.getPath()])
                         if noparser
                             args = command
-                        
+
+                        # console.log args.join(' ')
                         stdout = exec.spawnSync(config.config.php, args, options).output[1].toString('ascii')
 
                         delete @currentProcesses[processKey]
@@ -72,6 +73,7 @@ module.exports =
                     if noparser
                         args = command
 
+                    # console.log args.join(' ')
                     @currentProcesses[processKey] = exec.exec(config.config.php + " " + args.join(" "), options, (error, stdout, stderr) =>
                         delete @currentProcesses[processKey]
 

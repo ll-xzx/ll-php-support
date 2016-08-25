@@ -26,7 +26,6 @@ class AutocompleteProvider extends Tools implements ProviderInterface
             $isMethod = true;
             $name = substr($name, 0, strpos($name, '('));
         }
-
         $relevantClass = null;
         $data = $this->getClassMetadata($class);
 

@@ -16,7 +16,7 @@ module.exports =
             functions: 'https://secure.php.net/function.'
         }
 
-        @config['composer'] = atom.config.get('ll-php-support.binComposer')
+        # @config['composer'] = atom.config.get('ll-php-support.binComposer')
         @config['php'] = atom.config.get('ll-php-support.binPhp')
         @config['autoload'] = atom.config.get('ll-php-support.autoloadPaths')
         @config['classmap'] = atom.config.get('ll-php-support.classMapFiles')
@@ -69,16 +69,16 @@ module.exports =
             atom.notifications.addError(errorTitle, {'detail': errorMessage})
             return false
 
-        # Test Composer.
-        testResult = exec.spawnSync(@config.php, [@config.composer, "--version"])
-
-        if testResult.status = null or testResult.status != 0
-            testResult = exec.spawnSync(@config.composer, ["--version"])
-
-            # Try executing Composer directly.
-            if testResult.status = null or testResult.status != 0
-                atom.notifications.addError(errorTitle, {'detail': errorMessage})
-                return false
+        # # Test Composer.
+        # testResult = exec.spawnSync(@config.php, [@config.composer, "--version"])
+        # 
+        # if testResult.status = null or testResult.status != 0
+        #     testResult = exec.spawnSync(@config.composer, ["--version"])
+        # 
+        #     # Try executing Composer directly.
+        #     if testResult.status = null or testResult.status != 0
+        #         atom.notifications.addError(errorTitle, {'detail': errorMessage})
+        #         return false
 
         if interactive
             atom.notifications.addSuccess('ll-php-support - Success', {'detail': 'Configuration OK !'})
@@ -107,9 +107,9 @@ module.exports =
             @writeConfig()
             @testConfig(true)
 
-        atom.config.onDidChange 'll-php-support.binComposer', () =>
-            @writeConfig()
-            @testConfig(true)
+        # atom.config.onDidChange 'll-php-support.binComposer', () =>
+        #     @writeConfig()
+        #     @testConfig(true)
 
         atom.config.onDidChange 'll-php-support.autoloadPaths', () =>
             @writeConfig()

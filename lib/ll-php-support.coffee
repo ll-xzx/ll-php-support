@@ -9,6 +9,8 @@ proxy = require './services/php-proxy.coffee'
 parser = require './services/php-file-parser.coffee'
 plugins = require './services/plugin-manager.coffee'
 
+
+
 module.exports = LlPhpSupport =
     llPhpSupportView: null
     modalPanel: null
@@ -43,13 +45,15 @@ module.exports = LlPhpSupport =
 
 
     activate: (state) ->
+        console.log 'll-php-support'
         config.testConfig()
         config.init()
         @autocompletionManager = new AutocompletionManager()
         @autocompletionManager.init()
-        
+
         @tooltipManager = new TooltipManager()
         @tooltipManager.init()
+
         return
 
     deactivate: ->
