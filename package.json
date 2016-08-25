@@ -1,37 +1,37 @@
 {
-    "name": "ll-php-support",
-    "main": "./lib/ll-php-support",
-    "version": "0.0.0",
-    "description": "A short description of your package",
-    "keywords": [],
-    "activationCommands": {
-        "atom-workspace": "ll-php-support:toggle"
+  "name": "ll-php-support",
+  "main": "./lib/ll-php-support",
+  "version": "0.0.1",
+  "description": "A short description of your package",
+  "keywords": [],
+  "activationCommands": {
+    "atom-workspace": "ll-php-support:toggle"
+  },
+  "repository": "https://github.com/ll-xzx/ll-php-support.git",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "providedServices": {
+    "autocomplete.provider": {
+      "versions": {
+        "2.0.0": "getProvider"
+      }
     },
-    "repository": "https://github.com/ll-xzx/ll-php-support.git",
-    "license": "MIT",
-    "engines": {
-        "atom": ">=1.0.0 <2.0.0"
-    },
-    "providedServices": {
-        "autocomplete.provider": {
-            "versions": {
-                "2.0.0": "getProvider"
-            }
-        },
-        "php.autocomplete.tools": {
-            "versions": {
-                "0.16.0": "provideAutocompleteTools"
-            }
-        }
-    },
-    "activationEvents": [
-        "ll-php-support:toggle"
-    ],
-    "dependencies": {
-        "fuzzaldrin": "^2.1.0",
-        "md5": "2.0.0",
-        "sub-atom": "~1.0.0",
-        "jquery": "~2.1.4",
-        "atom-space-pen-views": "~2.0.5"
+    "php.autocomplete.tools": {
+      "versions": {
+        "0.16.0": "provideAutocompleteTools"
+      }
     }
+  },
+  "activationEvents": [
+    "ll-php-support:toggle"
+  ],
+  "dependencies": {
+    "fuzzaldrin": "^2.1.0",
+    "md5": "2.0.0",
+    "sub-atom": "~1.0.0",
+    "jquery": "~2.1.4",
+    "atom-space-pen-views": "~2.0.5"
+  }
 }
