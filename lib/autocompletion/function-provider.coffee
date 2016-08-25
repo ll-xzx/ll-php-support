@@ -17,7 +17,6 @@ class FunctionProvider extends AbstractProvider
      * @return array
     ###
     fetchSuggestions: ({editor, bufferPosition, scopeDescriptor, prefix}) ->
-        console.log {editor, bufferPosition, scopeDescriptor, prefix}
         # not preceded by a > (arrow operator), a $ (variable start), ...
         @regex = /(?:(?:^|[^\w\$_\>]))([a-z_]+)(?![\w\$_\>])/g
 

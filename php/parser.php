@@ -73,6 +73,10 @@ if (!is_dir($indexDir)) {
 Config::set('indexClasses', $indexDir . '/index.classes.json');
 
 foreach ($config['autoload'] as $conf) {
+    if (file_exists($conf)) {
+        require_once($conf);
+        break;
+    }
     $path = sprintf('%s/%s', $project, trim($conf, '/'));
     if (file_exists($path)) {
         require_once($path);
@@ -81,6 +85,11 @@ foreach ($config['autoload'] as $conf) {
 }
 
 foreach ($config['classmap'] as $conf) {
+
+    if (file_exists($conf)) {
+        require_once($conf);
+        break;
+    }
     $path = sprintf('%s/%s', $project, trim($conf, '/'));
     if (file_exists($path)) {
         Config::set('classmap_file', $path);

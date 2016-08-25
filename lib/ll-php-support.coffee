@@ -1,7 +1,6 @@
 LlPhpSupportView = require './ll-php-support-view'
 {CompositeDisposable} = require 'atom'
 
-
 TooltipManager = require "./tooltip/tooltip-manager.coffee"
 AutocompletionManager = require "./autocompletion/autocompletion-manager.coffee"
 StatusInProgress = require "./services/status-in-progress.coffee"
@@ -27,7 +26,7 @@ module.exports = LlPhpSupport =
 
         autoloadPaths:
             title: 'Autoloader file'
-            description: 'Relative path to the files of autoload.php from composer (or an other one). You can specify multiple
+            description: 'Absolute path, Relative path to the files of autoload.php from composer (or an other one). You can specify multiple
          paths (comma separated) if you have different paths for some projects.'
             type: 'array'
             default: ['vendor/autoload.php', 'autoload.php']
@@ -35,7 +34,7 @@ module.exports = LlPhpSupport =
 
         classMapFiles:
             title: 'Classmap files'
-            description: 'Relative path to the files that contains a classmap (array with "className" => "fileName"). By default
+            description: 'Absolute path, Relative path to the files that contains a classmap (array with "className" => "fileName"). By default
          on composer it\'s vendor/composer/autoload_classmap.php'
             type: 'array'
             default: ['vendor/composer/autoload_classmap.php', 'autoload/ezp_kernel.php']

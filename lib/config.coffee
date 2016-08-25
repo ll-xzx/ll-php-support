@@ -16,13 +16,13 @@ module.exports =
             functions: 'https://secure.php.net/function.'
         }
 
-        @config['composer'] = atom.config.get('atom-autocomplete-php.binComposer')
-        @config['php'] = atom.config.get('atom-autocomplete-php.binPhp')
-        @config['autoload'] = atom.config.get('atom-autocomplete-php.autoloadPaths')
-        @config['classmap'] = atom.config.get('atom-autocomplete-php.classMapFiles')
-        @config['packagePath'] = atom.packages.resolvePackagePath('atom-autocomplete-php')
-        @config['verboseErrors'] = atom.config.get('atom-autocomplete-php.verboseErrors')
-        @config['insertNewlinesForUseStatements'] = atom.config.get('atom-autocomplete-php.insertNewlinesForUseStatements')
+        @config['composer'] = atom.config.get('ll-php-support.binComposer')
+        @config['php'] = atom.config.get('ll-php-support.binPhp')
+        @config['autoload'] = atom.config.get('ll-php-support.autoloadPaths')
+        @config['classmap'] = atom.config.get('ll-php-support.classMapFiles')
+        @config['packagePath'] = atom.packages.resolvePackagePath('ll-php-support')
+        @config['verboseErrors'] = atom.config.get('ll-php-support.verboseErrors')
+        @config['insertNewlinesForUseStatements'] = atom.config.get('ll-php-support.insertNewlinesForUseStatements')
 
     ###*
      * Writes configuration in "php lib" folder
@@ -59,7 +59,7 @@ module.exports =
         exec = require "child_process"
         testResult = exec.spawnSync(@config.php, ["-v"])
 
-        errorTitle = 'atom-autocomplete-php - Incorrect setup!'
+        errorTitle = 'll-php-support - Incorrect setup!'
         errorMessage = 'Either PHP or Composer is not correctly set up and as a result PHP autocompletion will not work. ' +
           'Please visit the settings screen to correct this error. If you are not specifying an absolute path for PHP or ' +
           'Composer, make sure they are in your PATH.
@@ -81,7 +81,7 @@ module.exports =
                 return false
 
         if interactive
-            atom.notifications.addSuccess('atom-autocomplete-php - Success', {'detail': 'Configuration OK !'})
+            atom.notifications.addSuccess('ll-php-support - Success', {'detail': 'Configuration OK !'})
 
         return true
 
@@ -94,31 +94,31 @@ module.exports =
         @statusInProgress.hide()
 
         # Command for namespaces
-        atom.commands.add 'atom-workspace', 'atom-autocomplete-php:namespace': =>
+        atom.commands.add 'atom-workspace', 'll-php-support:namespace': =>
             namespace.createNamespace(atom.workspace.getActivePaneItem())
 
         # Command to test configuration
-        atom.commands.add 'atom-workspace', 'atom-autocomplete-php:configuration': =>
+        atom.commands.add 'atom-workspace', 'll-php-support:configuration': =>
             @testConfig(true)
 
         @writeConfig()
 
-        atom.config.onDidChange 'atom-autocomplete-php.binPhp', () =>
+        atom.config.onDidChange 'll-php-support.binPhp', () =>
             @writeConfig()
             @testConfig(true)
 
-        atom.config.onDidChange 'atom-autocomplete-php.binComposer', () =>
+        atom.config.onDidChange 'll-php-support.binComposer', () =>
             @writeConfig()
             @testConfig(true)
 
-        atom.config.onDidChange 'atom-autocomplete-php.autoloadPaths', () =>
+        atom.config.onDidChange 'll-php-support.autoloadPaths', () =>
             @writeConfig()
 
-        atom.config.onDidChange 'atom-autocomplete-php.classMapFiles', () =>
+        atom.config.onDidChange 'll-php-support.classMapFiles', () =>
             @writeConfig()
 
-        atom.config.onDidChange 'atom-autocomplete-php.verboseErrors', () =>
+        atom.config.onDidChange 'll-php-support.verboseErrors', () =>
             @writeConfig()
 
-        atom.config.onDidChange 'atom-autocomplete-php.insertNewlinesForUseStatements', () =>
+        atom.config.onDidChange 'll-php-support.insertNewlinesForUseStatements', () =>
             @writeConfig()
