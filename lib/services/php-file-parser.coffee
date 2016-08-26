@@ -390,8 +390,7 @@ module.exports =
             lineText = editor.lineTextForBufferRow(line)
             return unless lineText
 
-            #modify by liule1 for \t
-            position.column -= (lineText.match /^\t*/)[0].length * 3;
+
 
             if line != position.row
                 i = (lineText.length - 1)
