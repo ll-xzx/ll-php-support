@@ -1,7 +1,7 @@
 {
   "name": "ll-php-support",
   "main": "./lib/ll-php-support",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A short description of your package",
   "keywords": [],
   "repository": "https://github.com/ll-xzx/ll-php-support.git",
