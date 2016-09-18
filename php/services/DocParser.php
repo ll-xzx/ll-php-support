@@ -15,6 +15,8 @@ class DocParser
     const DESCRIPTION = 'description';
     const INHERITDOC = '{@inheritDoc}';
 
+    const PROPERTY = '@property';
+
     const TYPE_SPLITTER = '|';
     const TAG_START_REGEX = '/^\s*\*\s*\@[^@]+$/';
 
@@ -98,7 +100,9 @@ class DocParser
             static::VAR_TYPE     => 'filterVar',
             static::DEPRECATED   => 'filterDeprecated',
             static::THROWS       => 'filterThrows',
-            static::DESCRIPTION  => 'filterDescription'
+            static::DESCRIPTION  => 'filterDescription',
+            static::PROPERTY  => 'filterProperty',
+
         );
 
         foreach ($filters as $filter) {
@@ -239,6 +243,7 @@ class DocParser
         );
     }
 
+
     /**
      * Filters out deprecation information.
      *
@@ -325,6 +330,34 @@ class DocParser
                 'long'  => trim($description)
             )
         );
+    }
+
+    /**
+     * Filters out information about the property.
+     *
+     * @param string $docblock
+     * @param string $methodName
+     * @param array  $tags
+     *
+     * @return array
+     */
+    protected function filterProperty($docblock, $methodName, array $tags)
+    {
+        $ret = array(
+            'property' => array(
+            )
+        );
+        if (isset($tags[static::PROPERTY])) {
+            foreach ($tags[static::PROPERTY] as $v) {
+                list($class, $property) = $this->filterTwoParameterTag($v);
+                $ret['property'][] = array(
+                    'name' => $property,
+                    'type' => $class,
+                );
+            }
+        }
+
+        return $ret;
     }
 
     /**

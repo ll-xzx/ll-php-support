@@ -71,6 +71,34 @@ abstract class Tools
       );
    }
 
+   protected function getClassPropertiesByAnno(ReflectionClass $class)
+   {
+       $ret = array();
+        $parser = new DocParser();
+
+        $classIterator = $class;
+        while ($classIterator) {
+            $docComment = $classIterator->getDocComment() ?: '';
+            if ($docComment) {
+                $docParseResult = $parser->parse($docComment, array(
+                    DocParser::PROPERTY,
+                ), $classIterator->name);
+                if ($docParseResult['property']) {
+                    foreach ($docParseResult['property'] as $v) {
+                        if (!isset($ret[$v['name']])) {
+                            $ret[$v['name']] = $v;
+                        }
+                    }
+                }
+            }
+
+            $classIterator = $classIterator->getParentClass();
+        }
+
+        return $ret;
+   }
+
+
     /**
      * Fetches information about the specified method or function, such as its parameters, a description from the
      * docblock (if available), the return type, ...
@@ -248,8 +276,8 @@ abstract class Tools
                 $classIterator = $classIterator->getParentClass();
             }
         }
-        
-        // modify by liule1 20160824 for CI (e.g. $this->cache->redis) 
+
+        // modify by liule1 20160824 for CI (e.g. $this->cache->redis)
         if (!$docParseResult['var']['type']) {
             $data = $this->getClassMetadata($property->name);
             if ($data['wasFound']) {
@@ -463,8 +491,10 @@ abstract class Tools
             'isAbstract'   => $reflection->isAbstract(),
             'isInterface'  => $reflection->isInterface(),
             'parents'      => $this->getParentClasses($reflection),
-            'args'         => $this->getClassArguments($reflection)
+            'args'         => $this->getClassArguments($reflection),
         ));
+
+
 
         // Retrieve information about methods.
         foreach ($reflection->getMethods() as $method) {
@@ -518,6 +548,46 @@ abstract class Tools
             }
 
             $data['values'][$attribute->getName()] = $attributesValues;
+        }
+
+        // Retrieves information about properties/attributes.
+        foreach ($this->getClassPropertiesByAnno($reflection) as $property) {
+            $name = substr($property['name'], 1);   // $xxx
+            $class = $property['type'];
+            
+            if (!in_array($name, $data['names'])) {
+                $data['names'][] = $name;
+                $data['values'][$name] = null;
+            }
+
+            $attributesValues = array(
+                'isMethod'           => false,
+                'isProperty'         => true,
+                'isPublic'           => true,
+                'isProtected'        => false,
+                'isPrivate'          => false,
+                'isStatic'           => false,
+
+                'override'           => null,
+
+                'args'               => array(
+                    'return' => array(
+                        'type' => $class,
+                        'description' => '',
+                    )
+                ),
+                'declaringClass'     => null,
+                'declaringStructure' => null
+            );
+
+            if (is_array($data['values'][$name])) {
+                $attributesValues = array(
+                    $attributesValues,
+                    $data['values'][$name]
+                );
+            }
+
+            $data['values'][$name] = $attributesValues;
         }
 
         // Retrieve information about constants.

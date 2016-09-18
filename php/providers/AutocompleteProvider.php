@@ -29,6 +29,7 @@ class AutocompleteProvider extends Tools implements ProviderInterface
         $relevantClass = null;
         $data = $this->getClassMetadata($class);
 
+
         if (isset($data['values'][$name])) {
             $memberInfo = $data['values'][$name];
 
@@ -58,10 +59,11 @@ class AutocompleteProvider extends Tools implements ProviderInterface
                     // of the file containing it.
                     $relevantClass = $soleClassName;
 
-                    if (!empty($soleClassName) && $soleClassName[0] !== "\\") {
+                    if (!empty($soleClassName) && $soleClassName[0] !== "\\" && !empty($memberInfo['declaringStructure']['filename'])) {
                         $parser = new FileParser($memberInfo['declaringStructure']['filename']);
 
                         $useStatementFound = false;
+
                         $completedClassName = $parser->getFullClassName($soleClassName, $useStatementFound);
 
                         if ($useStatementFound) {
@@ -84,7 +86,7 @@ class AutocompleteProvider extends Tools implements ProviderInterface
         } else {
             $relevantClass = ucfirst($name);
         }
-        
+
 
         // Minor optimization to avoid fetching the same data twice.
         return ($relevantClass === $class) ? $data : $this->getClassMetadata($relevantClass);

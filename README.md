@@ -5,21 +5,21 @@
 
 此插件是拷贝 atom-autocomplete-php 修改的
 
-1、把隐式的成员属性当作类名，用以解决类似 
+1、把隐式的成员属性当作类名，用以解决类似
 
 
     $this->load->model('xxx_model');
     $this->xxx_model->xxx 的自动补全
 
 
-    
+
 2、autoload 多暴漏了当前脚本的路径，之前只有atom打开的项目路径
 
 
+3、加入zend studio的 property 功能，
 
 
-@TODO 
-goto和annotation没做，我得滚去敲代码了
+    @property class_name $obj
 
 
 暂时就这么多
