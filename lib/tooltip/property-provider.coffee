@@ -40,7 +40,7 @@ class PropertyProvider extends AbstractProvider
 
         # Show the summary (short description).
         description += '<div>'
-        description +=     (if value.args.descriptions.short then value.args.descriptions.short else '(No documentation available)')
+        description +=     (if value.args.descriptions && value.args.descriptions.short? then value.args.descriptions.short else '(No documentation available)')
         description += '</div>'
 
         # Show the (long) description.
