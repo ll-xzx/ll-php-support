@@ -118,7 +118,7 @@ class MemberProvider extends AbstractProvider
                     snippet     : snippet
                     displayText : displayText
                     leftLabel   : returnValue
-                    description : if ele.args.descriptions.short? then ele.args.descriptions.short else ''
+                    description : if ele.args.descriptions && ele.args.descriptions.short? then ele.args.descriptions.short else '' 
                     className   : if ele.args.deprecated then 'php-atom-autocomplete-strike' else ''
 
         return suggestions
